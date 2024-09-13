@@ -1,0 +1,136 @@
+<!DOCTYPE html> 
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Combustível</title>
+    
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: blue;
+            background-image: url(3448558.png);
+            background-repeat: repeat;
+        }
+
+        .ewert-regular {
+            font-family: "Ewert", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        .calculator {
+            width: 350px;
+            background-color: white;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra mais intensa e desfocada */
+            text-align: center;
+        }
+        
+        
+        .calculator h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding:5px;
+            position: absolute;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet">
+<body>
+    <div class="calculator">
+        <h2 class="ewert-regular">Calculadora de Combustível</h2>
+        <label for="precoGasolina">Preço da Gasolina (R$):</label>
+        <input type="number" id="precoGasolina" step="0.01"><br>
+
+        <label for="precoAlcool">Preço do Álcool (R$):</label>
+        <input type="number" id="precoAlcool" step="0.01"><br>
+
+        <button onclick="calcularVantagem()">Calcular</button>
+
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        function calcularVantagem() {
+            const precoGasolina = parseFloat(document.getElementById('precoGasolina').value);
+            const precoAlcool = parseFloat(document.getElementById('precoAlcool').value);
+
+            if (isNaN(precoGasolina) || isNaN(precoAlcool)) {
+                document.getElementById('resultado').innerText = 'Por favor, insira valores válidos para ambos os combustíveis.';
+                return;
+            }
+
+            if (precoGasolina === 0 || precoAlcool === 0) {
+                document.getElementById('resultado').innerText = 'Valor inválido! Os preços devem ser maiores que zero.';
+                return;
+            }
+            
+            const diferenca = (precoAlcool / precoGasolina) * 100;
+
+            if (diferenca <= 70) {
+                document.getElementById('resultado').innerText = 'O álcool é mais vantajoso.';
+            } else {
+                document.getElementById('resultado').innerText = 'A gasolina é mais vantajosa.';
+            }
+        }
+    </script>
+    <footer>
+        <p>Desenvolvido por Franklin Santana @2024</p>
+    </footer>
+</body>
+</html>
